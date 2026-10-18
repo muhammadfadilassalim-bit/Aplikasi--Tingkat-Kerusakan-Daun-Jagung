@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CornLeaf Guard - Dashboard Deteksi Tanaman AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Header Aplikasi -->
+    <header>
+        <div class="nav-container">
+            <div class="logo-flex">
+                <div class="logo-icon">🌽</div>
+                <div>
+                    <div style="font-weight: 700; font-size: 20px;">CornLeaf Guard</div>
+                    <div style="font-size: 11px; color: #a7f3d0; margin-top: 2px;">Sistem Pemantauan Kesehatan Komoditas Jagung</div>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; background-color: #064e3b; padding: 4px 12px; border-radius: 9999px; color: #d1fae5; font-weight: 600;">YOLOv11 + HSV ACTIVE</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Kontainer Dashboard Utama -->
+    <main class="main-container">
+        <section>
+            <div class="card">
+                <!-- FITUR 2: TAB PILIHAN KAMERA ATAU UPLOAD -->
+                <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+                    <div class="flex gap-2">
+                        <button id="tab-cam-btn" onclick="switchMode('camera')" class="tab-btn tab-active">📸 Kamera Direct</button>
+                        <button id="tab-upload-btn" onclick="switchMode('upload')" class="tab-btn tab-inactive">📁 Upload Foto File</button>
+                    </div>
+                    <div style="font-size: 12px; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+                        <span id="status-dot" style="width: 8px; height: 8px; border-radius: 50%; background-color: #f43f5e; display: inline-block;"></span>
+                        <span id="status-text">Kamera Nonaktif</span>
+                    </div>
+                </div>
+                
+                <!-- Jendela Tampilan Gambar / Kamera -->
+                <div class="video-box">
+                    <video id="video" autoplay playsinline></video>
+                    <canvas id="canvas" class="hidden"></canvas>
+                    <img id="preview-img" class="hidden" alt="Preview Upload">
+                    <div id="scanner-line" class="scanner"></div>
+                </div>
+
+                <!-- Input File Tersembunyi (FITUR 2) -->
+                <input type="file" id="file-input" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+
+                <!-- Tombol Kontrol Kamera & Upload -->
+                <div id="camera-controls" class="btn-grid">
+                    <button id="start-btn" onclick="startCamera()" class="btn-secondary">🔌 Aktifkan Kamera Perangkat</button>
+                    <button id="capture-btn" onclick="takeSnapshot()" class="btn-primary" disabled>📸 Potret Gambar Daun</button>
+                </div>
+
+                <div id="upload-controls" class="btn-grid hidden">
+                    <button onclick="document.getElementById('file-input').click()" class="btn-secondary">📂 Pilih Gambar dari Perangkat</button>
+                    <button id="upload-scan-btn" onclick="sendToYOLO()" class="btn-scan" disabled>🔍 Analisis File Gambar</button>
+                </div>
+            </div>
+
+            <!-- Panel Hasil Diagnosis -->
+            <div style="margin-bottom: 12px; font-weight: 700; color: #64748b; font-size: 14px; letter-spacing: 0.05em;">🔬 HASIL ANALISIS SEGMENTASI INSTAN</div>
+            <div id="result-container">
+                <div style="padding: 32px; text-align: center; font-size: 14px; color: #94a3b8; border: 1px dashed #e2e8f0; border-radius: 16px; background-color: white;">
+                    Silakan aktifkan kamera di atas atau upload file gambar daun untuk memicu proses analisis otomatis.
+                </div>
+            </div>
+        </section>
+
+        <!-- Sektor Kanan: Informasi -->
+        <aside>
+            <div class="card">
+                <div style="border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 16px;">
+                    <h2 style="font-weight: 700; color: #1e293b; font-size: 16px; margin: 0;">📚 Kriteria Tingkat Kerusakan</h2>
+                </div>
+                
+                <div class="space-y-3">
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                        <div class="font-bold text-sm text-emerald-700">🟢 DAUN SEHAT</div>
+                        <p class="text-xs text-slate-600 mt-1">Luas area bercak/kerusakan pada daun kurang dari 1.0%.</p>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                        <div class="font-bold text-sm text-amber-700">🟡 ADA KERUSAKAN</div>
+                        <p class="text-xs text-slate-600 mt-1">Luas area bercak/kerusakan pada daun berkisar antara 1.0% - 30.0%.</p>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                        <div class="font-bold text-sm text-rose-700">🔴 RUSAK PARAH</div>
+                        <p class="text-xs text-slate-600 mt-1">Luas area bercak/kerusakan pada daun lebih dari 30.0%.</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer style="width: 100%; background-color: white; border-top: 1px solid #e2e8f0; text-align: center; padding: 12px 0; font-size: 12px; color: #94a3b8; font-weight: 500; margin-top: auto;">
+        &copy; 2026 CornLeaf Guard - Universitas Pertanian Cerdas AI. All Rights Reserved.
+    </footer>
+
+    <!-- JavaScript Kontrol Antarmuka -->
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
