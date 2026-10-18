@@ -1,6 +1,6 @@
 # Aplikasi Jagung - CornLeaf Guard
 
-Struktur project dirapikan dengan memisahkan CSS dan JavaScript dari template HTML. Logika analisis YOLO + HSV dan markup UI dipertahankan.
+# Judul Aplikasi: Sistem Deteksi dan Analisis Tingkat Kerusakan Daun Jagung Berbasis YOLOv11 Segmentasi dan HSV Thresholding
 
 ## Struktur
 
@@ -9,8 +9,8 @@ Aplikasi_Jagung/
 ├── main.py
 ├── requirements.txt
 ├── models/
-│   ├── best.pt              # salin model Anda ke sini
-│   └── README.txt
+│   ├── best.pt
+│
 ├── static/
 │   ├── css/
 │   │   └── style.css
@@ -20,23 +20,33 @@ Aplikasi_Jagung/
     └── index.html
 ```
 
-## Menjalankan aplikasi
+## 👥 Anggota Tim & Kontribusi
 
-1. Pastikan Python sudah terpasang.
-2. Salin file model `best.pt` milik Anda ke folder `models/`.
-3. Buat dan aktifkan virtual environment (opsional tetapi disarankan).
-4. Pasang dependensi:
+**Muhammad Fadil Assalim: Mengembangkan API FastAPI, middleware CORS/Ngrok, dan integrasi pipeline inferensi & Pelatihan model YOLOv11, eksperimentasi HSV thresholding, dan ekstraksi piksel mask.
+**Vira Septiani: Perancangan UI/UX responsif, dual-input handler (kamera/upload), dan Fetch API integration.
+**Bala Wardana Putra: Pengujian skenario penolakan non-daun, deployment Ngrok, dan penyusunan laporan/proposal.
 
+## 🚀 Fitur Utama
+
+* Deteksi penyakit daun jagung menggunakan YOLOv11.
+* Segmentasi lesi penyakit dengan HSV Color Thresholding.
+* API Backend responsif berbasis FastAPI.
+* Antarmuka frontend dual-input (Kamera & Unggah Gambar).
+
+## 🛠️ Cara Instalasi & Menjalankan Aplikasi
+
+1. Clone repositori ini:
+   ```bash
+   git clone https://github.com
+   ```
+2. Install dependensi:
    ```bash
    pip install -r requirements.txt
    ```
-
-5. Jalankan server dari folder project:
-
+3. Jalankan server backend:
    ```bash
    uvicorn main:app --reload
    ```
 
-6. Buka `http://127.0.0.1:8000`.
-
-Catatan: akses kamera browser biasanya memerlukan localhost atau HTTPS. Tailwind CSS masih dimuat melalui CDN seperti pada project asli.
+## 📊 Hasil Pengujian / Demo
+<img width="1354" height="643" alt="apl_ui_1" src="https://github.com/user-attachments/assets/ca9a3037-30a7-470c-b262-b74afc8da565" />
