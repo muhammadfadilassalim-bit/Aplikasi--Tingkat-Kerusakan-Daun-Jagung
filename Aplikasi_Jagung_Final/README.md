@@ -8,14 +8,20 @@ Struktur project dirapikan dengan memisahkan CSS dan JavaScript dari template HT
 Aplikasi_Jagung/
 ├── main.py
 ├── requirements.txt
+├── Dockerfile
+├── README.md(1)
+├── README.md(2)
+├── packages.txt
+├── streamlit_app.py
 ├── models/
-│   ├── best.pt              # salin model Anda ke sini
-│   └── README.txt
+│   ├── best.pt
 ├── static/
 │   ├── css/
 │   │   └── style.css
 │   └── js/
 │       └── script.js
+├── _pycache_/
+│   ├── main.cpython-313.pyc
 └── templates/
     └── index.html
 ```
