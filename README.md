@@ -8,14 +8,20 @@
 Aplikasi_Jagung/
 ├── main.py
 ├── requirements.txt
+├── Dockerfile
+├── README.md(1)
+├── README.md(2)
+├── packages.txt
+├── streamlit_app.py
 ├── models/
 │   ├── best.pt
-│
 ├── static/
 │   ├── css/
 │   │   └── style.css
 │   └── js/
 │       └── script.js
+├── _pycache_/
+│   ├── main.cpython-313.pyc
 └── templates/
     └── index.html
 ```
